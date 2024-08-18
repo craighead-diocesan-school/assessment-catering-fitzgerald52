@@ -18,10 +18,21 @@
     {#each food.breakfast as food}
       {food.item} {food.description} {food.price} <img src={food.img} alt="" />
     {/each}
+    {#each food.dinner as food}
+      {food.item} {food.description} {food.price} <img src={food.img} alt="" />
+    {/each}{#each food.dessert as food}
+      {food.item}
+      {food.description}
+      {food.price} <img src={food.img} alt="" />
+    {/each}
   {/await}
+
   <p>Welcome to coding with SvelteKit, a modern JavaScript framework that makes it easy to code great apps.</p>
 </main>
 
 <footer>
   <p>&copy; Craighead Diocesan School 2024</p>
 </footer>
+
+<style>
+</style>
