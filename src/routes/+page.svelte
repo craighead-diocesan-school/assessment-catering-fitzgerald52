@@ -1,38 +1,67 @@
 <script>
   import Header from '$lib/Header.svelte'
-  let food = getFood()
-  async function getFood() {
+  let foods = getFoods()
+  let menu = []
+  async function getFoods() {
     let shopData = await fetch('https://digitech.craighead.school.nz/api/restaurant')
     return shopData.json()
+  }
+  function addToMenu(food) {
+    menu = [...menu, food]
   }
 </script>
 
 <Header />
 
 <main>
-  <h2>SvelteKit</h2>
-  {#await food}
+  {#await foods}
     <!-- gives users an errror message when the page is loading  -->
     waiting...
-  {:then food}
-    {#each food.breakfast as food}
-      {food.item} {food.description} {food.price} <img src={food.img} alt="" />
-    {/each}
-    {#each food.dinner as food}
-      {food.item} {food.description} {food.price} <img src={food.img} alt="" />
-    {/each}{#each food.dessert as food}
+  {:then foods}
+    {#each foods.breakfast as food}
       {food.item}
       {food.description}
       {food.price} <img src={food.img} alt="" />
+      <button
+        on:click={() => {
+          addToMenu(food)
+        }}
+      >
+        add item to menu</button
+      >
     {/each}
+    {#each foods.dinner as food}
+      {food.item}
+      {food.description}
+      {food.price} <img src={food.img} alt="" />
+
+      <button
+        on:click={() => {
+          addToMenu(food)
+        }}
+      >
+        add item to menu</button
+      >
+    {/each}{#each foods.dessert as food}
+      {food.item}
+      {food.description}
+      {food.price} <img src={food.img} alt="" />
+      <button
+        on:click={() => {
+          addToMenu(food)
+        }}
+      >
+        add item to menu</button
+      >
+    {/each}
+    <!-- <button on:click={food.selected == true}></button> -->
   {/await}
-
-  <p>Welcome to coding with SvelteKit, a modern JavaScript framework that makes it easy to code great apps.</p>
+  {#each menu as food}
+    {food.item}
+    {food.description}
+    {food.price} <img src={food.img} alt="" />
+  {/each}
 </main>
-
-<footer>
-  <p>&copy; Craighead Diocesan School 2024</p>
-</footer>
 
 <style>
 </style>
