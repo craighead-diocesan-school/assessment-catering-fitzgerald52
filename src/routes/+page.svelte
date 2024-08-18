@@ -2,6 +2,7 @@
   import Header from '$lib/Header.svelte'
   let foods = getFoods()
   let menu = []
+  let gst = 0.15
   async function getFoods() {
     let shopData = await fetch('https://digitech.craighead.school.nz/api/restaurant')
     return shopData.json()
@@ -60,6 +61,7 @@
     {food.item}
     {food.description}
     {food.price} <img src={food.img} alt="" />
+    {gst * food.price}
   {/each}
 </main>
 
