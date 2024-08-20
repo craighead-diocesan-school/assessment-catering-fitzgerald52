@@ -10,59 +10,75 @@
   function addToMenu(food) {
     menu = [...menu, food]
   }
+  function removeFood(index) {
+    menu = [...menu.slice(0, index), ...menu.slice(index + 1)]
+  }
 </script>
 
 <Header />
 
 <main>
-  {#await foods}
-    <!-- gives users an errror message when the page is loading  -->
-    waiting...
-  {:then foods}
-    {#each foods.breakfast as food}
-      {food.item}
-      {food.description}
-      {food.price} <img src={food.img} alt="" />
-      <button
-        on:click={() => {
-          addToMenu(food)
-        }}
-      >
-        add item to menu</button
-      >
-    {/each}
-    {#each foods.dinner as food}
-      {food.item}
-      {food.description}
-      {food.price} <img src={food.img} alt="" />
+  <div class="columns">
+    <div class="column">
+      {#await foods}
+        <!-- gives users an errror message when the page is loading  -->
+        waiting...
+      {:then foods}
+        {#each foods.breakfast as food}
+          {food.item}
+          {food.description}
+          {food.price} <img src={food.img} alt="" />
+          <button
+            on:click={() => {
+              addToMenu(food)
+            }}
+          >
+            add item to menu</button
+          >
+        {/each}
+        {#each foods.dinner as food}
+          {food.item}
+          {food.description}
+          {food.price} <img src={food.img} alt="" />
 
-      <button
-        on:click={() => {
-          addToMenu(food)
-        }}
-      >
-        add item to menu</button
-      >
-    {/each}{#each foods.dessert as food}
-      {food.item}
-      {food.description}
-      {food.price} <img src={food.img} alt="" />
-      <button
-        on:click={() => {
-          addToMenu(food)
-        }}
-      >
-        add item to menu</button
-      >
-    {/each}
-    <!-- <button on:click={food.selected == true}></button> -->
-  {/await}
-  {#each menu as food}
-    {food.item}
-    {food.description}
-    {food.price} <img src={food.img} alt="" />
-    {gst * food.price}
-  {/each}
+          <button
+            on:click={() => {
+              addToMenu(food)
+            }}
+          >
+            add item to menu</button
+          >
+        {/each}{#each foods.dessert as food}
+          {food.item}
+          {food.description}
+          {food.price} <img src={food.img} alt="" />
+          <button
+            on:click={() => {
+              addToMenu(food)
+            }}
+          >
+            add item to menu</button
+          >
+        {/each}
+        <!-- <button on:click={food.selected == true}></button> -->
+      {/await}
+    </div>
+    <div class="column">
+      {#each menu as food, index}
+        {food.item}
+        {food.description}
+        {food.price} <img src={food.img} alt="" />
+        {gst * food.price}
+        <button
+          on:click={() => {
+            removeFood(index)
+          }}
+        >
+          delete food</button
+        >
+      {/each}
+    </div>
+  </div>
 </main>
 
 <style>
