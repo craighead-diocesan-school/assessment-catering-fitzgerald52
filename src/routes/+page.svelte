@@ -3,6 +3,7 @@
   let foods = getFoods()
   let menu = []
   let gst = 0.15
+  let menuName = ''
   async function getFoods() {
     let shopData = await fetch('https://digitech.craighead.school.nz/api/restaurant')
     return shopData.json()
@@ -64,6 +65,8 @@
       {/await}
     </div>
     <div class="column">
+      <input bind:value={menuName} />
+
       {#each menu as food, index}
         {food.item}
         {food.description}
