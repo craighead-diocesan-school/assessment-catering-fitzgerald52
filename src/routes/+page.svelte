@@ -77,6 +77,10 @@
           delete food</button
         >
       {/each}
+
+      {#if menu.length == 0}
+        <p>menu is empty, start adding food items</p>
+      {/if}
     </div>
   </div>
 </main>
