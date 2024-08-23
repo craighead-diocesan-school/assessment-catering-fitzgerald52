@@ -4,6 +4,7 @@
   let menu = []
   let gst = 0.15
   let menuName = ''
+
   async function getFoods() {
     let shopData = await fetch('https://digitech.craighead.school.nz/api/restaurant')
     return shopData.json()
@@ -29,39 +30,47 @@
           {food.item}
           {food.description}
           {food.price} <img src={food.img} alt="" />
-          <button
-            on:click={() => {
-              addToMenu(food)
-            }}
-          >
-            add item to menu</button
-          >
+          {#if !menu.includes(food)}
+            <button
+              on:click={() => {
+                addToMenu(food)
+              }}
+            >
+              add item to menu</button
+            >
+          {:else}
+            <p>this item is already in your menu</p>
+          {/if}
         {/each}
         {#each foods.dinner as food}
           {food.item}
           {food.description}
           {food.price} <img src={food.img} alt="" />
-
-          <button
-            on:click={() => {
-              addToMenu(food)
-            }}
-          >
-            add item to menu</button
-          >
+          {#if !menu.includes(food)}
+            <button
+              on:click={() => {
+                addToMenu(food)
+              }}
+            >
+              add item to menu</button
+            >
+            <p>this item is already in your menu</p>
+          {/if}
         {/each}{#each foods.dessert as food}
           {food.item}
           {food.description}
           {food.price} <img src={food.img} alt="" />
-          <button
-            on:click={() => {
-              addToMenu(food)
-            }}
-          >
-            add item to menu</button
-          >
+          {#if !menu.includes(food)}
+            <button
+              on:click={() => {
+                addToMenu(food)
+              }}
+            >
+              add item to menu</button
+            >
+            <p>this item is already in your menu</p>
+          {/if}
         {/each}
-        <!-- <button on:click={food.selected == true}></button> -->
       {/await}
     </div>
     <div class="column">
