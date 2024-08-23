@@ -78,7 +78,6 @@
 
       {#each menu as food, index}
         {food.item}
-
         {food.description}
         {food.price} <img src={food.img} alt="" />
         {gst * food.price}
