@@ -14,8 +14,10 @@
     food.selected = true
     foods = foods
   }
-  function removeFood(index) {
+  function removeFood(index, food) {
     menu = [...menu.slice(0, index), ...menu.slice(index + 1)]
+    food.selected = false
+    foods = foods
   }
 </script>
 
@@ -94,7 +96,7 @@
 
         <button
           on:click={() => {
-            removeFood(index)
+            removeFood(index, food)
           }}
         >
           delete food</button
