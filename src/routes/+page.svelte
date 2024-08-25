@@ -20,6 +20,7 @@
 </script>
 
 <Header />
+<p>input name of custom menu <input bind:value={menuName} /></p>
 
 <main>
   <div class="columns">
@@ -83,7 +84,7 @@
       {/await}
     </div>
     <div class="column">
-      <input bind:value={menuName} />
+      <h1>Custom Menu: {menuName}</h1>
 
       {#each menu as food, index}
         {food.item}
