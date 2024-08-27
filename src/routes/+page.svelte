@@ -76,6 +76,7 @@
         {/each}
         {#each foods.dessert as food}
           <div class:highlighted={food.selected}>
+            <!-- outputs  information from component -->
             <Card {food} />
             {#if !menu.includes(food)}
               <button
