@@ -33,6 +33,7 @@
 <main>
   <div class="columns">
     <div class="column">
+      <!-- waits for menu items to load from other website -->
       {#await foods}
         <!-- gives users an errror message when the page is loading  -->
         waiting...
@@ -42,7 +43,7 @@
           <div class:highlighted={food.selected}>
             <Card {food} />
             {#if !menu.includes(food)}
-              <!-- //trigers add to menu function -->
+              <!-- //add food item to menu -->
               <button
                 on:click={() => {
                   addToMenu(food)
@@ -57,7 +58,7 @@
           </div>
         {/each}
         {#each foods.dinner as food}
-          <!-- //the class is highlighted only if food.selected is true -->
+          <!-- //assigns a class only if food.selected is true -->
           <div class:highlighted={food.selected}>
             <Card {food} />
 
@@ -99,7 +100,7 @@
 
       {#each menu as food, index}
         <Card {food} inMenu={true} />
-        <!-- //trigers the remove food function -->
+        <!-- //removes food from cart -->
         <button
           on:click={() => {
             removeFood(index, food)
